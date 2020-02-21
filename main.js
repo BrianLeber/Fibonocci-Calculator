@@ -55,7 +55,7 @@ function calculateFibIndex() {
   if (x - roundDown < roundUp - x) {
     let y =
       thousands_separators(roundDown) +
-      ", " +
+      " | " +
       thousands_separators(x - roundDown) +
       " less than " +
       thousands_separators(x);
@@ -63,7 +63,7 @@ function calculateFibIndex() {
   } else {
     let y =
       thousands_separators(roundUp) +
-      ", " +
+      " | " +
       thousands_separators(roundUp - x) +
       " more than " +
       thousands_separators(x);

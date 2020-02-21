@@ -1,16 +1,43 @@
 body,
 html {
   font-family: "montserrat";
+  margin: 0;
+  padding: 1em;
+}
+#fibonocciCalc {
+  background: lightgray;
+  border: black solid 3px;
+  border-radius: 7px;
+  padding: 4px;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto auto;
 }
 
 h2 {
+  display: inline;
+  padding: 0.5em 1em;
   margin: auto;
-  align-self: center;
+  background: silver;
+  text-align: center;
+}
+p {
+  display: inline-block;
+  text-align: center;
+  font-size: 0.7em;
+}
+label {
+  margin-right: 0.5em;
+}
+div {
+  display: inline-block;
+  text-align: center;
+  padding: 0.5em 1em;
 }
 
 #fibCalculate {
   display: inline-block;
-  padding: 3px 5px;
+  margin: 0.5em auto;
   border: 2px solid #000;
   border-radius: 5px;
   cursor: pointer;

@@ -7,7 +7,7 @@
     <title>Fibonocci Index</title>
   </head>
   <body>
-    <section>
+    <section id="fibonocciCalc" class="toolSection">
       <h2>Fibonocci Calculator</h2>
       <p>
         This tool will take an input number and round it to the nearest number
@@ -15,10 +15,16 @@
       </p>
       <div>
         <label for="valueInput">Enter number to round</label
-        ><input type="number" name="valueInput" id="fibInput" />
+        ><input
+          type="number"
+          name="valueInput"
+          id="fibInput"
+          maxlength="6"
+          size="5"
+        />
       </div>
-      <div id="fibCalculate">Calculate</div>
       <div id="fibResult">_</div>
+      <div id="fibCalculate">Calculate</div>
     </section>
 
     <script src="main.js"></script>
