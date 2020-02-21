@@ -19,6 +19,7 @@ h2 {
   padding: 0.5em 1em;
   margin: auto;
   background: silver;
+  border-radius: 20px;
   text-align: center;
 }
 p {
