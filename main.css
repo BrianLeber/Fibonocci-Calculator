@@ -43,3 +43,6 @@ div {
   border-radius: 5px;
   cursor: pointer;
 }
+#fibCalculate:hover {
+  background-color: silver;
+}
