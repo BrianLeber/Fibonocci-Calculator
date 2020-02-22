@@ -4,29 +4,150 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="main.css" />
-    <title>Fibonocci Index</title>
+    <title>Calculation tools</title>
   </head>
   <body>
+    <h1 id="pageHeader">Calculation Tools</h1>
+    <section class="toolArea">
     <section id="fibonocciCalc" class="toolSection">
       <h2>Fibonocci Calculator</h2>
       <p>
-        This tool will take an input number and round it to the nearest number
-        in the Fibonocci sequence.
+        This tool will take an input number and round it <span>to the nearest number
+        in the Fibonocci sequence.</span>
       </p>
       <div>
-        <label for="valueInput">Enter number to round</label
+        <label for="fib_valueInput">Enter number to round</label
         ><input
           type="number"
-          name="valueInput"
+          name="fib_valueInput"
           id="fibInput"
-          maxlength="6"
           size="5"
         />
       </div>
       <div id="fibResult">_</div>
-      <div class="" id="fibCalculate">Calculate</div>
+      <div class="calcButton" id="fibCalculate">Calculate</div>
     </section>
 
+    <section id="exponentCalc" class="toolSection">
+      <h2>Exponent Calculator</h2>
+      <p>
+        This tool will take an input number and return the <span>product of the number to the given exponent.</span>
+      </p>
+      <div>
+      <label for="exponent__toSquare">Number: </label>
+      <input
+        type="number"
+        id="exponentCalc__toSquare"
+        name="exponent__ToSquare"
+        required
+        min="1"
+        max="100"
+        size="5"
+        value="2"
+      />
+    </div>
+      <div>
+        <label for="factorBy">Exponent: </label>
+        <input
+          type="number"
+          id="exponent__factorBy"
+          name="factorBy"
+          required
+          min="1"
+          max="100"
+          size="3"
+          value="2"
+        />
+      </div>
+      <div id="exponentResult">_</div>
+      <div class="calcButton" id="exponentCalculate">Calculate</div>
+</section>
+
+<section id="downtimeCalc" class="toolSection">
+
+  <h2 id="downtime__header">Downtime Calculator</h2>
+  <p>
+    This will calculate the extimated cost of internet downtime <span>for a given group of employees</span>
+  </p>
+<section id="downtimeFactors">
+  <div id="downtime__employee">
+    <label for="emp">Affected Employees: </label>
+    <input
+      type="number"
+      id="emp"
+      name="emp"
+      required
+      min="1"
+      max="10000"
+      size="5"
+      value="20"
+      onchange="updateDowntimeCost()"
+    />
+  </div>
+  <div id="downtime__hourly">
+    <label for="hourly">Average Wage: </label>
+    <input
+      type="number"
+      id="hourlyWage"
+      name="hourlyWage"
+      required
+      min="1"
+      max="50"
+      size="5"
+      value="18"
+      onchange="updateDowntimeCost()"
+    />
+  </div>
+  <div id="downtime__productivity">
+  <label for="productivity">Productivity loss (%): </label>
+    <input
+      type="number"
+      id="productivityPercentage"
+      name="productivityPercentage"
+      required
+      min="1"
+      max="100"
+      size="5"
+      value="50"
+      onchange="updateDowntimeCost()"
+    />
+  </div>
+  <div id="downtime__down">
+    <label for="down">Hours down/year: </label>
+    <input
+      type="number"
+      id="hoursDown"
+      name="hoursDown"
+      required
+      min="1"
+      max="500"
+      size="5"
+      value="20"
+      onchange="updateDowntimeCost()"
+    />
+  </div>
+  <div id="downtime__incident">
+    <label for="incident">Incidents/year: </label>
+    <input
+      type="number"
+      id="incidentCount"
+      name="incidentCount"
+      required
+      min="1"
+      max="10000"
+      size="5"
+      value="20"
+      onchange="updateDowntimeCost()"
+    />
+  </div>
+  <div id="downtime__downtimeResult">Downtime cost: $ 
+    <div id="downtime__dtResult"></div>
+    
+  </div>
+</section>
+</section>
+
+</section>
     <script src="main.js"></script>
   </body>
 </html>

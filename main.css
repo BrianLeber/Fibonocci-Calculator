@@ -1,17 +1,32 @@
+
+
 body,
 html {
   font-family: "montserrat";
   margin: 0;
   padding: 1em;
 }
-#fibonocciCalc {
+h1{
+  font-size: 2em;
+  text-align: center;
+  color: white;
+  background-color: rgba(112, 128, 144,.80);
+  border-radius: 15px;
+  padding: 1em;
+  margin: 1em;
+}
+.toolArea{
+  display: grid;
+
+}
+.toolSection{
   background: lightgray;
   border: black solid 3px;
   border-radius: 7px;
   padding: 4px;
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto auto auto auto;
+  margin: 4px;
+  width: fit-content;
+  display: grid
 }
 
 h2 {
@@ -22,27 +37,53 @@ h2 {
   border-radius: 20px;
   text-align: center;
 }
+
 p {
   display: inline-block;
   text-align: center;
   font-size: 0.7em;
+  
+}
+p span {
+  display: inline-block;
 }
 label {
-  margin-right: 0.5em;
+  margin: 0.5em;
+
 }
+
 div {
   display: inline-block;
   text-align: center;
-  padding: 0.5em 1em;
+  padding: 0.25em 1em;
 }
 
-#fibCalculate {
+.calcButton {
   display: inline-block;
   margin: 0.5em auto;
   border: 2px solid #000;
   border-radius: 5px;
   cursor: pointer;
 }
-#fibCalculate:hover {
+
+.calcButton:hover {
   background-color: silver;
+}
+
+#downtimeCalc section{
+  display: grid;
+  
+}
+
+@media (min-width: 600px){
+  .toolArea{
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+  
+  }
+  #downtimeCalc section{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto;
+  }
 }

@@ -3,8 +3,8 @@
 
 // Set Variables ____________________________________________
 
-let fibonocci = [0, 1]; // Set the first two numbers in the fibonocci sequence (all others can be deduced from there)
-let i = 2; // set i to the value of the next fibonocci number to index: position 2
+var fibonocci = [0, 1]; // Set the first two numbers in the fibonocci sequence (all others can be deduced from there)
+var i = fibonocci.length; // set i to the value of the next fibonocci number to index: position 2
 // let x = 1; // Set a number to round to the fibonocci sequence
 
 var fibResult = document.querySelector("#fibResult");
@@ -24,7 +24,7 @@ fibCalc.addEventListener("click", function() {
 
 // declare functions _______________________________________
 
-// Add numerical punctuation to numbers
+// Add thousands separaters to numbers
 function thousands_separators(num) {
   var num_parts = num.toString().split(".");
   num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -70,3 +70,61 @@ function calculateFibIndex() {
     fibResult.innerHTML = y;
   }
 }
+
+
+// Exponent Calc
+var exponentCalcButton = document.querySelector("#exponentCalculate");
+var exponentBase = document.querySelector("#exponentCalc__toSquare");
+var exponentExponent = document.querySelector("#exponent__factorBy");
+var exponentResult = document.querySelector("#exponentResult");
+
+exponentCalcButton.addEventListener("click", exponentCalcResult);
+
+function exponentCalcResult() {
+  let number = exponentBase.value;
+  let factor = exponentExponent.value;
+  let result = toTheNth(number,factor);
+  exponentResult.innerHTML = result;
+  // alert(result);
+}
+
+function toTheNth(number, factor) {
+  let increase;
+  if (factor == 0){
+    increase = 1
+    }else{
+    increase = number;
+    let n = 1;
+    while (n < factor) {
+      increase = increase * number;
+      n++;
+    }
+  }
+  return increase;
+}
+
+// Downtime Calculation
+// fuction 1: multiply number of employees by average wage times by number of incidents, then divide by 12 (for 5 minute calculations)
+// e.g. incidentCost = (emp * hourlyWage * incidentCount) / 12
+//
+// function 2: multiply number of employees by average wage times percentage of work still able to complete. Subtract the total number of outages times the number of employees times wecentage of work unable to do. 
+// e.g. ongoingCost = (emp * hourlyWage) * (hoursDown - (incidentCount * productivityPercentage / 12))
+// Return sum of the results of both functions
+
+function calculateDowntimeCost(emp, hourlyWage, productivityPercentage, hoursDown, incidentCount){
+  let percentage = productivityPercentage /100;
+  let hourlyCost = emp * hourlyWage * percentage;
+  let incidentCost = hourlyCost * incidentCount / 12;
+  let totalHourCost = hourlyCost * hoursDown * incidentCount * percentage / 12;
+  let result = incidentCost + totalHourCost;
+  return result;
+}
+function updateDowntimeCost(){
+  let emp = document.getElementById("emp").value;
+let hourlyWage = document.getElementById("hourlyWage").value;
+let productivityPercentage = document.getElementById("productivityPercentage").value;
+let hoursDown = document.getElementById("hoursDown").value;
+let incidentCount = document.getElementById("incidentCount").value;
+document.getElementById("downtime__dtResult").innerHTML = calculateDowntimeCost(emp, hourlyWage, productivityPercentage, hoursDown, incidentCount).toFixed(2);
+}
+updateDowntimeCost();
