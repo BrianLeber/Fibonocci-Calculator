@@ -71,7 +71,6 @@ function calculateFibIndex() {
   }
 }
 
-
 // Exponent Calc
 var exponentCalcButton = document.querySelector("#exponentCalculate");
 var exponentBase = document.querySelector("#exponentCalc__toSquare");
@@ -83,16 +82,16 @@ exponentCalcButton.addEventListener("click", exponentCalcResult);
 function exponentCalcResult() {
   let number = exponentBase.value;
   let factor = exponentExponent.value;
-  let result = toTheNth(number,factor);
+  let result = toTheNth(number, factor);
   exponentResult.innerHTML = result;
   // alert(result);
 }
 
 function toTheNth(number, factor) {
   let increase;
-  if (factor == 0){
-    increase = 1
-    }else{
+  if (factor == 0) {
+    increase = 1;
+  } else {
     increase = number;
     let n = 1;
     while (n < factor) {
@@ -107,24 +106,49 @@ function toTheNth(number, factor) {
 // fuction 1: multiply number of employees by average wage times by number of incidents, then divide by 12 (for 5 minute calculations)
 // e.g. incidentCost = (emp * hourlyWage * incidentCount) / 12
 //
-// function 2: multiply number of employees by average wage times percentage of work still able to complete. Subtract the total number of outages times the number of employees times wecentage of work unable to do. 
+// function 2: multiply number of employees by average wage times percentage of work still able to complete. Subtract the total number of outages times the number of employees times wecentage of work unable to do.
 // e.g. ongoingCost = (emp * hourlyWage) * (hoursDown - (incidentCount * productivityPercentage / 12))
 // Return sum of the results of both functions
 
-function calculateDowntimeCost(emp, hourlyWage, productivityPercentage, hoursDown, incidentCount){
-  let percentage = productivityPercentage /100;
+function calculateDowntimeCost(
+  emp,
+  hourlyWage,
+  productivityPercentage,
+  hoursDown,
+  incidentCount
+) {
+  let percentage = productivityPercentage / 100;
   let hourlyCost = emp * hourlyWage * percentage;
-  let incidentCost = hourlyCost * incidentCount / 12;
-  let totalHourCost = hourlyCost * hoursDown * incidentCount * percentage / 12;
+  let incidentCost = (hourlyCost * incidentCount) / 12;
+  let totalHourCost =
+    (hourlyCost * hoursDown * incidentCount * percentage) / 12;
   let result = incidentCost + totalHourCost;
   return result;
 }
-function updateDowntimeCost(){
+function updateDowntimeCost() {
   let emp = document.getElementById("emp").value;
-let hourlyWage = document.getElementById("hourlyWage").value;
-let productivityPercentage = document.getElementById("productivityPercentage").value;
-let hoursDown = document.getElementById("hoursDown").value;
-let incidentCount = document.getElementById("incidentCount").value;
-document.getElementById("downtime__dtResult").innerHTML = calculateDowntimeCost(emp, hourlyWage, productivityPercentage, hoursDown, incidentCount).toFixed(2);
+  let hourlyWage = document.getElementById("hourlyWage").value;
+  let productivityPercentage = document.getElementById("productivityPercentage")
+    .value;
+  let hoursDown = document.getElementById("hoursDown").value;
+  let incidentCount = document.getElementById("incidentCount").value;
+  document.getElementById(
+    "downtime__dtResult"
+  ).innerHTML = calculateDowntimeCost(
+    emp,
+    hourlyWage,
+    productivityPercentage,
+    hoursDown,
+    incidentCount
+  ).toFixed(2);
 }
 updateDowntimeCost();
+
+function fibMemo(num, memo) {
+  memo = memo || {};
+  console.log(num, memo);
+  if (memo[num]) return memo[num];
+  if (num <= 1) return 1;
+
+  return (memo[num] = fibMemo(num - 1, memo) + fibMemo(num - 2, memo));
+}
