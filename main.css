@@ -6,6 +6,7 @@ html {
   margin: 0;
   padding: 1em;
 }
+
 h1{
   font-size: 2em;
   text-align: center;
@@ -15,6 +16,7 @@ h1{
   padding: 1em;
   margin: 1em;
 }
+
 .toolArea{
   display: grid;
 
