@@ -44,5 +44,5 @@ div {
   cursor: pointer;
 }
 #fibCalculate:hover {
-  background-color: silver;
+  background-image: linear-gradient(to bottom right, lightgray, silver);
 }
