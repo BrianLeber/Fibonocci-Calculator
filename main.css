@@ -5,6 +5,56 @@ html {
   padding: 1em;
 }
 
+/*Cookie Consent Begin*/
+#myCookieConsent {
+  z-index: 999;
+  min-height: 20px;
+  font-family: OpenSans, arial, "sans-serif";
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  position: fixed;
+  color: #fff;
+  bottom: 0px;
+  right: 10px;
+  display: none;
+  left: 0;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+}
+#myCookieConsent.show {
+  display: inline-block;
+}
+#myCookieConsent div {
+  padding: 5px 0 0;
+}
+#myCookieConsent a {
+  color: #ffba55;
+  display: inline-block;
+  padding: 0 10px;
+}
+#myCookieConsent a:hover {
+  color: #fda016;
+}
+#myCookieConsent a#cookieButton {
+  display: inline-block;
+  color: #000000;
+  font-size: 1.1em;
+  background: #ffba55;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 2px 20px;
+  float: right;
+  border-radius: 20px;
+}
+#myCookieConsent a#cookieButton:hover {
+  background: #fda016;
+  color: #000;
+}
+
+/*Cookie Consent End*/
+
 h1 {
   font-size: 2em;
   text-align: center;
@@ -12,11 +62,13 @@ h1 {
   background-color: rgba(112, 128, 144, 0.8);
   border-radius: 15px;
   padding: 1em;
-  margin: 1em;
+  margin: 1em auto;
+  max-width: 600px;
 }
 
 .toolArea {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(315px, 1fr));
 }
 .toolSection {
   background: lightgray;
@@ -25,6 +77,8 @@ h1 {
   padding: 0.5em;
   margin: 0.5em;
   width: fit-content;
+  min-width: 12rem;
+  max-width: 20rem;
   display: grid;
 }
 
@@ -69,17 +123,14 @@ div {
 
 #downtimeCalc section {
   display: grid;
+  text-align: justify;
 }
 
 @media (min-width: 600px) {
   .toolArea {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
   }
   #downtimeCalc section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto auto auto;
   }
 }
 .hide {

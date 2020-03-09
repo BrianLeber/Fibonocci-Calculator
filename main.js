@@ -10,6 +10,7 @@ var i = fibonocci.length; // set i to the value of the next fibonocci number to 
 var fibResult = document.querySelector("#fibResult");
 var fibCalc = document.querySelector("#fibCalculate");
 var fibInput = document.querySelector("#fibInput");
+var cookieButton = document.querySelector("#cookieButton");
 
 // Set listeners
 fibCalc.addEventListener("click", function() {
@@ -23,6 +24,52 @@ fibCalc.addEventListener("click", function() {
 });
 
 // declare functions _______________________________________
+
+function clearCookies(names) {
+  var i = 0,
+    namesLength = names.length;
+  for (i; i < namesLength; i += 1) {
+    document.cookie =
+      names[i] + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/";
+  }
+}
+// clearCookies(["cookieName1", "cookieName2"]);
+
+// Cookie Compliancy BEGIN
+function GetCookie(name) {
+  var arg = name + "=";
+  var alen = arg.length;
+  var clen = document.cookie.length;
+  var i = 0;
+  while (i < clen) {
+    var j = i + alen;
+    if (document.cookie.substring(i, j) == arg) return "here";
+    i = document.cookie.indexOf(" ", i) + 1;
+    if (i == 0) break;
+  }
+  return null;
+}
+function testFirstCookie() {
+  var visit = GetCookie("cookieCompliancyAccepted");
+  if (visit == null) {
+    document.querySelector("#myCookieConsent").classList.add("show"); // Show warning
+  } else {
+    // Already accepted
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  testFirstCookie();
+  cookieButton.addEventListener("click", function() {
+    console.log("Understood");
+    var expire = new Date();
+    expire = new Date(expire.getTime() + 7776000000);
+    document.cookie =
+      "cookieCompliancyAccepted=here; expires=" + expire + ";path=/";
+    document.querySelector("#myCookieConsent").classList.remove("show");
+  });
+});
+// Cookie Compliancy END
 
 // Add thousands separaters to numbers
 function thousands_separators(num) {
