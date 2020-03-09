@@ -127,8 +127,6 @@ div {
 }
 
 @media (min-width: 600px) {
-  .toolArea {
-  }
   #downtimeCalc section {
     display: grid;
   }
