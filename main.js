@@ -5,11 +5,11 @@
 
 var fibonocci = [0, 1]; // Set the first two numbers in the fibonocci sequence (all others can be deduced from there)
 var i = fibonocci.length; // set i to the value of the next fibonocci number to index: position 2
-// let x = 1; // Set a number to round to the fibonocci sequence
 
 var fibResult = document.querySelector("#fibResult");
 var fibCalc = document.querySelector("#fibCalculate");
 var fibInput = document.querySelector("#fibInput");
+var cookie = document.cookie;
 var cookieButton = document.querySelector("#cookieButton");
 
 // Set listeners
@@ -70,6 +70,41 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 // Cookie Compliancy END
+
+// Include external HTML
+function includeHTML() {
+  var z, i, elmnt, file, xhttp;
+  /* Loop through a collection of all HTML elements: */
+  z = document.getElementsByTagName("*");
+  for (i = 0; i < z.length; i++) {
+    elmnt = z[i];
+    /*search for elements with a certain atrribute:*/
+    file = elmnt.getAttribute("w3-include-html");
+    if (file) {
+      /* Make an HTTP request using the attribute value as the file name: */
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4) {
+          if (this.status == 200) {
+            elmnt.innerHTML = this.responseText;
+          }
+          if (this.status == 404) {
+            elmnt.innerHTML = "Page not found.";
+          }
+          /* Remove the attribute, and call this function once more: */
+          elmnt.removeAttribute("w3-include-html");
+          includeHTML();
+        }
+      };
+      xhttp.open("GET", file, true);
+      xhttp.send();
+      /* Exit the function: */
+      return;
+    }
+  }
+}
+includeHTML();
+// END
 
 // Add thousands separaters to numbers
 function thousands_separators(num) {
@@ -157,31 +192,71 @@ function toTheNth(number, factor) {
 // e.g. ongoingCost = (emp * hourlyWage) * (hoursDown - (incidentCount * productivityPercentage / 12))
 // Return sum of the results of both functions
 
-function calculateDowntimeCost(
-  emp,
-  hourlyWage,
-  productivityPercentage,
-  hoursDown,
-  incidentCount
-) {
-  let percentage = productivityPercentage / 100;
-  let hourlyCost = emp * hourlyWage * percentage;
-  let incidentCost = (hourlyCost * incidentCount) / 12;
-  let totalHourCost =
-    (hourlyCost * hoursDown * incidentCount * percentage) / 12;
+function getDowntimeCookie() {
+  var cookies = document.cookie.split("; ");
+  if (GetCookie("downtimeCalcValues") != null) {
+    var loop = true;
+    var x;
+    var i = 0;
+    while (loop == true) {
+      var crumb = cookies[i].split("=");
+      console.log(crumb);
+      if (crumb[0] == "downtimeCalcValues") {
+        let x = crumb[1].split(",");
+        emp.value = x[0];
+        hourlyWage.value = x[1];
+        productivityPercentage.value = x[2];
+        hoursDown.value = x[3];
+        incidentCount.value = x[4];
+        loop = false;
+      }
+      i++;
+      console.log(x);
+    }
+  }
+}
+
+var emp = document.querySelector("#emp");
+var hourlyWage = document.querySelector("#hourlyWage");
+var productivityPercentage = document.querySelector("#productivityPercentage");
+var hoursDown = document.querySelector("#hoursDown");
+var incidentCount = document.querySelector("#incidentCount");
+var dtResult = document.getElementById("downtime__dtResult");
+
+function calculateDowntimeCost(e, w, p, h, c) {
+  e = emp.value;
+  w = hourlyWage.value;
+  p = 1 - productivityPercentage.value / 100;
+  h = hoursDown.value;
+  c = incidentCount.value;
+
+  let hourlyCost = e * w * p;
+  let incidentCost = (hourlyCost * c) / 12;
+  let totalHourCost = (hourlyCost * h * c * p) / 12;
   let result = incidentCost + totalHourCost;
+
+  // Save Values in Cookies
+  var expire = new Date();
+  expire = new Date(expire.getTime() + 7776000000);
+  document.cookie =
+    "downtimeCalcValues=" +
+    e +
+    "," +
+    w +
+    "," +
+    productivityPercentage.value +
+    "," +
+    h +
+    "," +
+    c +
+    "; expires=" +
+    expire +
+    ";path=/";
+
   return result;
 }
 function updateDowntimeCost() {
-  let emp = document.getElementById("emp").value;
-  let hourlyWage = document.getElementById("hourlyWage").value;
-  let productivityPercentage = document.getElementById("productivityPercentage")
-    .value;
-  let hoursDown = document.getElementById("hoursDown").value;
-  let incidentCount = document.getElementById("incidentCount").value;
-  document.getElementById(
-    "downtime__dtResult"
-  ).innerHTML = calculateDowntimeCost(
+  dtResult.innerHTML = calculateDowntimeCost(
     emp,
     hourlyWage,
     productivityPercentage,
@@ -189,6 +264,7 @@ function updateDowntimeCost() {
     incidentCount
   ).toFixed(2);
 }
+getDowntimeCookie();
 updateDowntimeCost();
 
 function fibMemo(num, memo) {
